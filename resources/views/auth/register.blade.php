@@ -50,3 +50,59 @@
         </div>
     </form>
 </x-guest-layout>
+
+
+@extends('layouts.auth')
+
+@section('content')
+    <div class="row flex-between-center mb-2">
+        <div class="col-auto">
+            <h5>Register</h5>
+        </div>
+        <div class="col-auto fs-10 text-600">
+            <span class="mb-0 undefined">Have an account?</span>
+            <span><a href="{{ route('login') }}">Login</a></span>
+        </div>
+    </div>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="mb-3">
+            <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" placeholder="Name" value="{{ old('name') }}" />
+            @error('name')
+                <div class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" placeholder="Email address" value="{{ old('email') }}" />
+            @error('email')
+                <div class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                </div>
+            @enderror
+        </div>
+
+        <div class="row gx-2">
+            <div class="mb-3 col-sm-6">
+                <input class="form-control @error('password') is-invalid @enderror" name="password" type="password" placeholder="Password" />
+                @error('password')
+                    <div class="invalid-feedback">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3 col-sm-6">
+                <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" autocomplete="on" placeholder="Confirm Password" />
+                @error('password_confirmation')
+                    <div class="invalid-feedback">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
+            </div>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Register</button>
+        </div>
+    </form>
+@endsection
